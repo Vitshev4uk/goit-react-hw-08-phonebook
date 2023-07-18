@@ -1,7 +1,9 @@
 import React from 'react';
 import { useAuth } from '../hooks';
-import Content from './Content/Content';
-import AuthPage2 from 'pages/AuthPage2';
+// import Content from './Content/Content';
+// import AuthPage2 from 'pages/AuthPage2';
+import  LoginPage  from 'pages/login/LoginPage'
+// import { LoginPage2 } from 'pages/login/LoginPage2'
 // import ContactForm from './ContactForm/ContactForm';
 // import Filter from './Filter/Filter';
 // import ContactList from './ContactList/ContactList';
@@ -20,12 +22,14 @@ function App() {
   } = useAuth();
   console.log({ isLoggedIn, user });
 
+  return <LoginPage/>
 
-  if (isLoggedIn) {
-    return <Content/>
-  } else {
-    return <AuthPage2/>
-  }
+
+  // if (isLoggedIn) {
+  //   return <Content/>
+  // } else {
+  //   return <AuthPage2/>
+  // }
 
   // const dispatch = useDispatch();
   // React.useEffect(() => {

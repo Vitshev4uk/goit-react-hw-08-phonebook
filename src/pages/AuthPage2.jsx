@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/operationsAuth';
 import { register } from 'redux/auth/operationsAuth';
+import { useAuth } from 'hooks';
 
 function AuthPage2() {
     const [pageType, setPageType] = useState('login');
@@ -10,7 +11,9 @@ function AuthPage2() {
     const loginPasswordRef = useRef();
     const registerEmailRef = useRef();
     const registerPasswordRef = useRef();
-    const registerNameRef = useRef();
+  const registerNameRef = useRef();
+  
+  const { isAuthError } = useAuth()
 
     const dispatch = useDispatch();
 
@@ -34,6 +37,7 @@ function AuthPage2() {
         <div>Login</div>
         <input ref={loginEmailRef} type="email" placeholder="enter Email" />
         <input ref={loginPasswordRef} type="password" placeholder="enter Password" />
+        {isAuthError && <div>Invalid email or password</div>}
         <button onClick={handleLogin}>Login</button> <br /> <br />
         <button
           onClick={() => {
@@ -52,6 +56,7 @@ function AuthPage2() {
         <input ref={registerNameRef} type="text" placeholder="enter Name" />
         <input ref={registerEmailRef} type="email" placeholder="enter Email" />
         <input ref={registerPasswordRef} type="password" placeholder="enter Password" />
+          {isAuthError && <div>try another characters</div>}
         <button onClick={handleSignup}>Sign Up</button> <br /> <br />
         <button
           onClick={() => {
