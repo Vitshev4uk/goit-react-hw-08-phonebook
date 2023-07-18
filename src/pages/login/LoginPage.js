@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from 'hooks';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/operationsAuth';
 
@@ -12,6 +13,11 @@ function LoginPage() {
   const { isAuthError } = useAuth();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleRegisterNavigete = () => {
+    navigate('/signup')
+  }
 
   const handleLogin = () => {
     dispatch(login({email, password}));
@@ -39,7 +45,7 @@ function LoginPage() {
           <br />
       {isAuthError && <div>Invalid email or password</div>}
       <button onClick={handleLogin}>Login</button> <br /> <br />
-      <button>
+      <button onClick={handleRegisterNavigete}>
         go to Register
       </button>
     </div>

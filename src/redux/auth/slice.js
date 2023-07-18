@@ -6,7 +6,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
-  isAuthError: false
+  isAuthError: false,
 };
 
 const authSlice = createSlice({
@@ -30,7 +30,7 @@ const authSlice = createSlice({
     },
     [login.rejected](state, _action) {
       state.isAuthError = true;
-    }
+    },
   },
 });
 
