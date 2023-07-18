@@ -10,7 +10,6 @@ function Content() {
             <div>
                 <div>your name: {name}</div> <br />
                 <div>your email: {email}</div>
-                <div>a</div>
             </div>
         )
 }

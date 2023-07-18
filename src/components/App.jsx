@@ -28,7 +28,7 @@ function App() {
     if (isLoggedIn) {
       navigate('/');
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <Routes>
