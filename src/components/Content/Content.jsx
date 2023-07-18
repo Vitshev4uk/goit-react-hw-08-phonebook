@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Content.module.css';
 import { nanoid } from '@reduxjs/toolkit';
-import { addContact } from 'redux/auth/operationsAuth';
+import { addContact, deleteContact } from 'redux/auth/operationsAuth';
 import { filterContacts } from 'redux/auth/slice';
 
 function Content() {
@@ -14,7 +14,6 @@ function Content() {
 
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
-  // const [filteredContact, setFilteredContact] = useState('');
 
   const dispatch = useDispatch();
 
@@ -48,6 +47,15 @@ function Content() {
   const handleFilteredContact = () => {
     const filterValue = filterNameRef.current.value;
     dispatch(filterContacts(filterValue));
+  };
+
+  const filter = useSelector(state => state.auth.filterValue);
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
+    const handleDeleteContact = contactId => {
+    dispatch(deleteContact(contactId));
   };
 
   return (
@@ -93,11 +101,29 @@ function Content() {
           className={css.InputFilter}
           type="text"
           placeholder="filter"
-          //   value={filteredContact}
           ref={filterNameRef}
           onChange={handleFilteredContact}
         />
       </div>
+      <ul className={css.ContactList}>
+        {filteredContacts.map((contact, id) => {
+          return (
+            <li className={css.ContactListItem} key={id}>
+              <p className={css.Name}>
+                {contact.name}: {contact.number}
+              </p>
+              <button
+                className={css.BtnSubmit}
+                onClick={() => {
+                  handleDeleteContact(contact.id);
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
