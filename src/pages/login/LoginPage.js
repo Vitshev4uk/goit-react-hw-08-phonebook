@@ -42,7 +42,9 @@ function LoginPage() {
           setPassword(event.target.value);
         }}
           />
-          <br />
+      <br />
+      <p>Coconutqwer@gmail.com</p>
+      <p>Coconut12345</p>
       {isAuthError && <div>Invalid email or password</div>}
       <button onClick={handleLogin}>Login</button> <br /> <br />
       <button onClick={handleRegisterNavigete}>

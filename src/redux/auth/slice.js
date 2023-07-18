@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, login } from './operationsAuth';
+import { register, login, fetchContacts, addContact, deleteContact } from './operationsAuth';
 
 const initialState = {
   user: { name: null, email: null },
@@ -7,11 +7,22 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isAuthError: false,
+  contacts: [],
+    filterValue: '',
+    isLoading: false,
+    error: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+
+   reducers: {
+    filterContacts(state, action) {
+      state.filterValue = action.payload;
+    },
+  },
+   
   extraReducers: {
     [register.fulfilled](state, action) {
       state.user = action.payload.user;
@@ -31,7 +42,49 @@ const authSlice = createSlice({
     [login.rejected](state, _action) {
       state.isAuthError = true;
     },
+
+      [fetchContacts.pending](state, _) {
+      state.isLoading = true;
+    },
+    [fetchContacts.fulfilled](state, action) {
+      state.contacts = action.payload;
+      state.isLoading = false;
+    },
+    [fetchContacts.rejected](state, _) {
+      state.isLoading = false;
+      state.error = true;
+      console.log(state.error)
+    },
+
+    [addContact.pending](state, _) {
+      state.isLoading = true;
+    },
+    [addContact.fulfilled](state, action) {
+      state.contacts.push(action.payload);
+      state.isLoading = false;
+    },
+    [addContact.rejected](state, _) {
+      state.isLoading = false;
+      state.error = true;
+    },
+
+    [deleteContact.pending](state, _) {
+      state.isLoading = true;
+    },
+    [deleteContact.fulfilled](state, action) {
+      state.isLoading = false;
+      const index = state.contacts.findIndex(
+        contact => contact.id === action.payload.id
+      );
+      state.contacts.splice(index, 1);
+    },
+    [deleteContact.rejected](state, _) {
+      state.isLoading = false;
+      state.error = true;
+    },
   },
 });
+
+export const filterContacts = authSlice.actions.filterContacts;
 
 export const authRedusers = authSlice.reducer; 
