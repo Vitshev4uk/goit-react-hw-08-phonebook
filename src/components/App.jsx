@@ -1,7 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAuth } from '../hooks';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Content from './Content/Content';
 // import AuthPage2 from 'pages/AuthPage2';
 import LoginPage from 'pages/login/LoginPage';
