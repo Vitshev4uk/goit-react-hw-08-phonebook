@@ -8,7 +8,7 @@ function NotFoundPage() {
         setTimeout(() => {
             navigate('/', { replace: true })
         }, 3000)
-    }, []);
+    }, [navigate]);
 
     return <div>
         This page not found!
