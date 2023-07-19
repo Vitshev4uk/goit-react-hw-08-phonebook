@@ -6,9 +6,9 @@ import { login } from 'redux/auth/operationsAuth';
 
 function LoginPage() {
   const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    
-    console.log({email, password})
+  const [email, setEmail] = useState('');
+
+  console.log({ email, password });
 
   const { isAuthError } = useAuth();
 
@@ -16,11 +16,11 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleRegisterNavigete = () => {
-    navigate('/signup')
-  }
+    navigate('/signup');
+  };
 
   const handleLogin = () => {
-    dispatch(login({email, password}));
+    dispatch(login({ email, password }));
   };
 
   return (
@@ -41,15 +41,13 @@ function LoginPage() {
         onChange={event => {
           setPassword(event.target.value);
         }}
-          />
+      />
       <br />
       <p>Coconutqwer@gmail.com</p>
       <p>Coconut12345</p>
       {isAuthError && <div>Invalid email or password</div>}
       <button onClick={handleLogin}>Login</button> <br /> <br />
-      <button onClick={handleRegisterNavigete}>
-        go to Register
-      </button>
+      <button onClick={handleRegisterNavigete}>go to Register</button>
     </div>
   );
 }

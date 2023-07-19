@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Content.module.css';
 import { nanoid } from '@reduxjs/toolkit';
-import { addContact, deleteContact } from 'redux/auth/operationsAuth';
+import { addContact, deleteContact, logout } from 'redux/auth/operationsAuth';
 import { filterContacts } from 'redux/auth/slice';
 
 function Content() {
@@ -54,14 +54,20 @@ function Content() {
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
-    const handleDeleteContact = contactId => {
+  const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+}
 
   return (
     <div>
       <p>Hello {name}!!!</p> <br />
       <div>your email: {email}</div>
+      <br />
+      <button onClick={handleLogout}>Logout</button>
       <form className={css.Form} onSubmit={handleSubmit}>
         <p className={css.InputName}>Name</p>
         <input

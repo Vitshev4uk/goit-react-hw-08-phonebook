@@ -11,12 +11,12 @@ function RegisterPage() {
 
   const { isAuthError } = useAuth();
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const handleLoginNavigete = () => {
-        navigate('/login');
-    }
+  const handleLoginNavigete = () => {
+    navigate('/login');
+  };
 
   const handleRegister = () => {
     dispatch(register({ name, email, password }));

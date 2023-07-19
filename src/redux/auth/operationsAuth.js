@@ -7,6 +7,10 @@ const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
+const deleteAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = '';
+}
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -15,8 +19,8 @@ export const register = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-        console.log(error)
-        return thunkAPI.rejectWithValue(error);
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -29,10 +33,41 @@ export const login = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      deleteAuthHeader();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
+
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Not registered user!')
+    }
+
+    try {
+      setAuthHeader(persistedToken);
+      const response = await axios.get('/users/current');
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -52,7 +87,7 @@ export const fetchContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
   'contacts/addContacts',
   async ({ name, number }, thunkAPI) => {
-      try {
+    try {
       const response = await axios.post('/contacts', { name, number });
       return response.data;
     } catch (e) {
