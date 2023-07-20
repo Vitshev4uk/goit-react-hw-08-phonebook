@@ -1,0 +1,12 @@
+.Input {
+    height: 20px;
+    width: 200px;
+}
+.Title {
+    margin: 10px;
+    font-size: 50px;
+    color: white;
+}
+.TitleContainer {
+    background-color: blue;
+}
