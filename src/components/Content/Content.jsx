@@ -10,7 +10,7 @@ import { AppBar, Button, Container, TextField, Typography } from '@mui/material'
 
 function Content() {
   const {
-    user: { name, email },
+    user: { name },
   } = useAuth();
 
   const [contactName, setContactName] = useState('');
