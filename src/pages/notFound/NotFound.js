@@ -7,7 +7,7 @@ function NotFoundPage() {
 
     useEffect(() => {
         setTimeout(() => {
-            navigate('/', { replace: true })
+            navigate('/login', { replace: true })
         }, 1000)
     }, [navigate]);
 
