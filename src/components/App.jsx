@@ -8,7 +8,7 @@ import { refreshUser, fetchContacts } from 'redux/auth/operationsAuth';
 import Content from './Content/Content';
 import LoginPage from 'pages/login/LoginPage';
 import RegisterPage from 'pages/register/RegisterPage';
-import NotFoundPage from 'pages/notFound/NotFound';
+// import NotFoundPage from 'pages/notFound/NotFound';
 import ProtectedRoute from 'routes/ProtectedRoute';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 
