@@ -41,7 +41,7 @@ function RegisterPage() {
         <form onSubmit={handleRegister}>
       <TextField
         type="text"
-        placeholder="enter Name"
+        label="enter Name"
         value={name}
         onChange={event => {
           setName(event.target.value);
@@ -50,7 +50,7 @@ function RegisterPage() {
       />
       <TextField
         type="email"
-        placeholder="enter Email"
+        label="enter Email"
         value={email}
         onChange={event => {
           setEmail(event.target.value);
@@ -59,7 +59,7 @@ function RegisterPage() {
       />
       <TextField
         type="password"
-        placeholder="enter Password"
+        label="enter Password"
         value={password}
         onChange={event => {
           setPassword(event.target.value);
