@@ -49,7 +49,8 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<LoginPage />} />
+      {/* <Route path="*" element={<NotFoundPage/>} /> */}
     </Routes>
   );
 }
