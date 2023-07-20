@@ -7,6 +7,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { addContact, deleteContact, logout } from 'redux/auth/operationsAuth';
 import { filterContacts } from 'redux/auth/slice';
 import { AppBar, Button, Container, TextField, Typography } from '@mui/material';
+import SnackBar from 'components/LoadingSpinner/SnackBar/SnackBar';
 
 function Content() {
   const {
@@ -15,6 +16,7 @@ function Content() {
 
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
+  const [isSnackOpen, setIsSnackOpen] = useState(false); 
 
   const dispatch = useDispatch();
 
@@ -41,6 +43,8 @@ function Content() {
 
     setContactName('');
     setContactNumber('');
+
+    setIsSnackOpen(true);
   };
 
   const filterNameRef = useRef();
@@ -73,8 +77,6 @@ function Content() {
       </AppBar>
       <Container sx={{ mt: 2 }}>
         <div>
-                 
-      {/* <div>your email: {email}</div> */}
       <Button onClick={handleLogout} variant='contained'>Logout</Button>
         </div>
 
@@ -143,7 +145,8 @@ function Content() {
             </li>
           );
         })}
-      </ul>
+        </ul>
+        <SnackBar isOpen={isSnackOpen} handleClose={() => {setIsSnackOpen(false)}}></SnackBar>
       </Container>
      
     </div>

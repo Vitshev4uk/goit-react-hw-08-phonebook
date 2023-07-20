@@ -3,6 +3,13 @@ import { useAuth } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operationsAuth';
+import {
+  AppBar,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 function RegisterPage() {
   const [name, setName] = useState('');
@@ -18,41 +25,53 @@ function RegisterPage() {
     navigate('/login');
   };
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
     dispatch(register({ name, email, password }));
   };
 
   return (
     <div>
-      <div>Login</div>
-      <input
+            <AppBar position="static">
+        <Typography variant="h4" sx={{ mb: 4, ml: 17, mt: 4 }}>
+          Register
+        </Typography>
+      </AppBar>
+      <Container sx={{ mt: 5 }}>
+        <form onSubmit={handleRegister}>
+      <TextField
         type="text"
         placeholder="enter Name"
         value={name}
         onChange={event => {
           setName(event.target.value);
         }}
+         sx={{ display: 'block', mb: 1 }}
       />
-      <input
+      <TextField
         type="email"
         placeholder="enter Email"
         value={email}
         onChange={event => {
           setEmail(event.target.value);
         }}
+         sx={{ display: 'block', mb: 1 }}
       />
-      <input
+      <TextField
         type="password"
         placeholder="enter Password"
         value={password}
         onChange={event => {
           setPassword(event.target.value);
         }}
-      />
-      <br />
+         sx={{ display: 'block', mb: 2 }}
+          />
+           <Button type='submit' variant="contained">Register</Button>
+          </form>
       {isAuthError && <div>Invalid email or password</div>}
-      <button onClick={handleRegister}>Register</button> <br /> <br />
-      <button onClick={handleLoginNavigete}>go to Login</button>
+     
+        <Button onClick={handleLoginNavigete} variant="outlined" sx={{ mt: 2 }}>go to Login</Button>
+        </Container>
     </div>
   );
 }

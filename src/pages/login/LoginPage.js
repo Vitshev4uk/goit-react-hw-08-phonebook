@@ -3,8 +3,15 @@ import { useAuth } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/operationsAuth';
-import { AppBar, Container, Typography } from '@mui/material';
-import css from './LoginPage.module.css'
+import {
+  Alert,
+  AppBar,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from '@mui/material';
+import css from './LoginPage.module.css';
 
 function LoginPage() {
   const [password, setPassword] = useState('');
@@ -21,51 +28,53 @@ function LoginPage() {
     navigate('/signup');
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
 
   return (
     <div>
-      
-
-      <AppBar position='static'>
-        <Typography
-            variant='h4'
-            sx={{mb: 4, ml: 17, mt: 4}}
-        >Login</Typography>
+      <AppBar position="static">
+        <Typography variant="h4" sx={{ mb: 4, ml: 17, mt: 4 }}>
+          Login
+        </Typography>
       </AppBar>
-      <Container sx={{mt: 5}}>
+      <Container sx={{ mt: 5 }}>
         <form onSubmit={handleLogin}>
-            <input
-        className={css.Input}
-        type="email"
-        label="enter Email"
-        value={email}
-        onChange={event => {
-          setEmail(event.target.value);
-        }}
-        sx={{height: '20px'}}
+          <TextField
+            className={css.Input}
+            type="email"
+            label="enter Email"
+            value={email}
+            onChange={event => {
+              setEmail(event.target.value);
+            }}
+            sx={{ display: 'block', mb: 1 }}
           />
-      <input
-        type="password"
-        label="enter Password"
-        value={password}
-        onChange={event => {
-          setPassword(event.target.value);
-        }}
-      />
-      <br />
-      <p>Coconutqwer@gmail.com</p>
-      <p>Coconut12345</p>
-      {isAuthError && <div>Invalid email or password</div>}
-      <button onClick={handleLogin} type='submit'>Login</button> <br /> <br />
+          <TextField
+            type="password"
+            label="enter Password"
+            value={password}
+            onChange={event => {
+              setPassword(event.target.value);
+            }}
+            sx={{ display: 'block', mb: 2 }}
+          />
+          {isAuthError && <Alert severity="error" sx={{mb: 2, width: 164}}>Invalid email or password</Alert>}
+          <Button type="submit" variant="contained">
+            Login
+          </Button>
         </form>
-    
-      <button onClick={handleRegisterNavigete}>go to Register</button>
+
+        <Button
+          onClick={handleRegisterNavigete}
+          variant="outlined"
+          sx={{ mt: 2 }}
+        >
+          go to Register
+        </Button>
       </Container>
-    
     </div>
   );
 }

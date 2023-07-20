@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import css from './NotFound.module.css'
 
 function NotFoundPage() {
     const navigate = useNavigate();
@@ -7,11 +8,11 @@ function NotFoundPage() {
     useEffect(() => {
         setTimeout(() => {
             navigate('/', { replace: true })
-        }, 3000)
-    });
+        }, 1000)
+    }, [navigate]);
 
-    return <div>
-        This page not found!
+    return <div className={css.TextContainer}>
+        <div className={css.Text}>This page not found!</div>
     </div>
 
 }
